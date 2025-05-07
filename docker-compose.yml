@@ -1,12 +1,23 @@
+# docker-compose.yml
 version: "3.8"
 
 services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
-    volumes:
-      - .:/app            # Code-Mount für Live-Reload im Development
+  margin-calculator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: panudln/margin-calculator:latest
+    container_name: margin-calculator
     environment:
+      # Flask-Umgebungsvariablen
       FLASK_APP: app
-      FLASK_ENV: development
+      FLASK_ENV: production
+    ports:
+      - "5000:5000"        # expose Flask on Host:5000 → Container:5000
+    restart: unless-stopped
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
