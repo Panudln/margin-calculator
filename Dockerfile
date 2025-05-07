@@ -1,22 +1,18 @@
-# Verwende Python 3.13 slim als Basis
+# Dockerfile
 FROM python:3.13-slim
 
-# Arbeitsverzeichnis im Container
+# Arbeitsverzeichnis
 WORKDIR /app
 
-# Nur requirements installieren (Cache sauber halten)
+# Nur Abhängigkeiten kopieren & installieren (Cache sauber halten)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Restlichen Code kopieren
+# Quellcode kopieren
 COPY . .
 
-# Umgebungsvariablen für Flask
-ENV FLASK_APP=app
-ENV FLASK_ENV=production
-
-# Port, auf dem Flask lauscht
+# Port freigeben
 EXPOSE 5000
 
-# Standard-Startbefehl
+# Default-Befehl
 CMD ["flask", "run", "--host=0.0.0.0"]
