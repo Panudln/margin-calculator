@@ -1,16 +1,18 @@
-# 1. Leichtgewichtiges Python-Image
+# Verwende das schlanke Python-Image
 FROM python:3.13-slim
 
-# 2. Arbeitsverzeichnis
+# Arbeitsverzeichnis
 WORKDIR /app
 
-# 3. Nur Dependencies installieren (Cache sauber halten)
+# Nur dependencies installieren (Cache sauber halten)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Restlichen Code kopieren
+# Restlichen Quellcode kopieren
 COPY . .
 
-# 5. Production-WSGI: benutze Gunicorn statt Flask-Dev-Server
-#    – WSGI-Callable ist in app.py: app = Flask(__name__)
+# Port freigeben
+EXPOSE 5000
+
+# Mit Gunicorn starten
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
