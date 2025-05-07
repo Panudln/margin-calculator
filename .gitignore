@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.env
+*.env
+
+# Flask instance folder
+instance/
+
+# VS Code
+.vscode/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# macOS
+.DS_Store
