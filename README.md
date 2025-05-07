@@ -1,8 +1,5 @@
 # 🎉 Margin Calculator
 
-[![Logo](https://raw.githubusercontent.com/Panudln/margin-calculator/main/static/logo.png)](https://raw.githubusercontent.com/Panudln/margin-calculator/main/static/logo.png
-)
-
 **Margin Calculator** ist eine schlanke Web-App, die dir dabei hilft, Einkaufspreise (Netto/Brutto) und Verkaufspreise mit Marge im Handumdrehen zu berechnen. Egal ob in Euro oder Prozent – gib einfach deine Werte ein und erhalte alle wichtigen Kennzahlen auf einen Blick.
 
 ---
