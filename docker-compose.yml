@@ -1,8 +1,8 @@
-version: "3.8"
+version: '3.8'
+
 services:
   margin-calculator:
     build: .
-    container_name: margin-calculator
     ports:
-      - "5000:5000"       # Port 5000 außen → 5000 innen
+      - "5000:5000"
     restart: unless-stopped
