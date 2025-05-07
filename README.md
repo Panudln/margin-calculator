@@ -1,11 +1,7 @@
 <!-- Badges -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)  
-[![Docker Pulls](https://img.shields.io/docker/pulls/panudln/margin-calculator.svg)](https://hub.docker.com/r/panudln/margin-calculator)
-
 # 🎉 Margin Calculator
-
-![Logo](static/logo.png)
 
 **Margin Calculator** ist eine schlanke Web-App, die dir hilft, Einkaufspreise (Netto/Brutto) und Verkaufspreise mit Marge blitzschnell zu berechnen – wahlweise in Euro oder Prozent. 
 
