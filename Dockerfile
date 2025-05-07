@@ -1,18 +1,16 @@
-# Dockerfile
+# 1. Leichtgewichtiges Python-Image
 FROM python:3.13-slim
 
-# Arbeitsverzeichnis
+# 2. Arbeitsverzeichnis
 WORKDIR /app
 
-# Nur Abhängigkeiten kopieren & installieren (Cache sauber halten)
+# 3. Nur Dependencies installieren (Cache sauber halten)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Quellcode kopieren
+# 4. Restlichen Code kopieren
 COPY . .
 
-# Port freigeben
-EXPOSE 5000
-
-# Default-Befehl
-CMD ["flask", "run", "--host=0.0.0.0"]
+# 5. Production-WSGI: benutze Gunicorn statt Flask-Dev-Server
+#    – WSGI-Callable ist in app.py: app = Flask(__name__)
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
