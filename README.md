@@ -66,6 +66,10 @@ Führe den Befehl unbedingt im Projekt-Stammverzeichnis aus.
 Andernfalls kann Compose die **Dockerfile** nicht finden und meldet Fehler wie
 `failed to read dockerfile: ... Dockerfile: no such file or directory`.
 
+Wenn du stattdessen `docker stack deploy` (z.B. über Portainer) nutzt, baue
+das Image vorher lokal und gib es in der Compose-Datei unter `image:` an –
+Swarm ignoriert nämlich `build:`-Anweisungen.
+
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ---
