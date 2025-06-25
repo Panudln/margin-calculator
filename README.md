@@ -103,5 +103,3 @@ MIT © 2025 Panudln
 ## 🤝 Contributing
 
 Beiträge willkommen! Öffne gerne Issues oder Pull Requests. 🙌
-
-```
