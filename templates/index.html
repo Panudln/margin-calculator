@@ -35,14 +35,20 @@
     </form>
 
     {% if result %}
-      <div class="result-box">
-        <h2>Ergebnis</h2>
-        <ul>
-          {% for key, value in result.items() %}
-            <li data-key="{{ key }}"><strong>{{ key }}:</strong> {{ value }}</li>
-          {% endfor %}
-        </ul>
-      </div>
+      {% if result.get('Fehler') %}
+        <div class="error-box">
+          <strong>Fehler:</strong> {{ result['Fehler'] }}
+        </div>
+      {% else %}
+        <div class="result-box">
+          <h2>Ergebnis</h2>
+          <ul>
+            {% for key, value in result.items() %}
+              <li data-key="{{ key }}"><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 

@@ -29,13 +29,22 @@ def index():
 
             # Decimal-Konvertierung
             mwst = Decimal(mwst_raw)
+            if mwst < 0:
+                raise ValueError("MwSt darf nicht negativ sein.")
+            if mwst > 100:
+                raise ValueError("MwSt darf maximal 100% betragen.")
+
             if ek_netto:
                 en = Decimal(ek_netto)
                 ek_netto_val  = q2(en)
+                if ek_netto_val < 0:
+                    raise ValueError("EK Netto darf nicht negativ sein.")
                 ek_brutto_val = q2(ek_netto_val * (Decimal(1) + mwst/Decimal(100)))
             else:
                 eb = Decimal(ek_brutto)
                 ek_brutto_val = q2(eb)
+                if ek_brutto_val < 0:
+                    raise ValueError("EK Brutto darf nicht negativ sein.")
                 ek_netto_val  = q2(ek_brutto_val / (Decimal(1) + mwst/Decimal(100)))
 
             # Marge anwenden
