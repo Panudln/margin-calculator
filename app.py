@@ -67,7 +67,84 @@ def index():
         ek_brutto=str(ek_brutto),
         mwst=str(mwst_raw),
         aufschlag=str(aufschlag),
-        aufschlag_typ=aufschlag_typ
+        aufschlag_typ=aufschlag_typ,
+        mode="single"
+    )
+
+
+@app.route("/multi", methods=["GET", "POST"])
+def multi():
+    items = []
+    results = []
+    totals = None
+
+    mwst_raw = request.form.get("mwst", "19")
+    aufschlag = request.form.get("aufschlag", "0")
+    aufschlag_typ = request.form.get("aufschlag_typ", "%")
+
+    descs = request.form.getlist("desc[]")
+    qtys = request.form.getlist("qty[]")
+    prices = request.form.getlist("price[]")
+
+    try:
+        if request.method == "POST":
+            mwst = Decimal(mwst_raw)
+            a = Decimal(aufschlag or "0")
+            total_ek = Decimal(0)
+            total_vk = Decimal(0)
+            total_margin = Decimal(0)
+
+            for desc, qty, price in zip(descs, qtys, prices):
+                if not desc and not qty and not price:
+                    continue
+                q = Decimal(qty)
+                p = Decimal(price)
+
+                item = {
+                    "desc": desc,
+                    "qty": qty,
+                    "price": price,
+                }
+
+                ek_total = q2(q * p)
+                if aufschlag_typ == "%":
+                    vk_total = q2(ek_total * (Decimal(1) + a/Decimal(100)))
+                else:
+                    vk_total = q2(ek_total + a * q)
+                margin = q2(vk_total - ek_total)
+
+                results.append({
+                    "desc": desc,
+                    "ek": f"{ek_total:.2f} €",
+                    "vk": f"{vk_total:.2f} €",
+                    "margin": f"{margin:.2f} €",
+                })
+
+                total_ek += ek_total
+                total_vk += vk_total
+                total_margin += margin
+
+                items.append(item)
+
+            if results:
+                totals = {
+                    "EK": f"{q2(total_ek):.2f} €",
+                    "VK": f"{q2(total_vk):.2f} €",
+                    "Marge": f"{q2(total_margin):.2f} €",
+                }
+
+    except (InvalidOperation, ValueError) as e:
+        totals = {"Fehler": str(e)}
+
+    return render_template(
+        "index.html",
+        items=items,
+        results=results,
+        totals=totals,
+        mwst=str(mwst_raw),
+        aufschlag=str(aufschlag),
+        aufschlag_typ=aufschlag_typ,
+        mode="multi"
     )
 
 if __name__ == "__main__":
