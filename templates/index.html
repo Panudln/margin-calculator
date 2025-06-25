@@ -34,16 +34,21 @@
       </fieldset>
     </form>
 
-    {% if result %}
-      <div class="result-box">
-        <h2>Ergebnis</h2>
-        <ul>
-          {% for key, value in result.items() %}
-            <li data-key="{{ key }}"><strong>{{ key }}:</strong> {{ value }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
+      {% if result %}
+        <div class="result-box">
+          <h2>Ergebnis</h2>
+          <ul>
+            {% for key, value in result.items() %}
+              <li data-key="{{ key }}"><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+          </ul>
+          <p>
+            <a href="{{ url_for('export', format='pdf') }}">PDF herunterladen</a>
+            |
+            <a href="{{ url_for('export', format='csv') }}">CSV herunterladen</a>
+          </p>
+        </div>
+      {% endif %}
   </div>
 
   <!-- Credit-Box -->
