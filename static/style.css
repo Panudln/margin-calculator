@@ -28,6 +28,11 @@ body.dark {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Reusable fade-in animation */
+.fade-in {
+  animation: fadeInUp 0.4s ease-out;
+}
+
 /* Body */
 body {
   margin: 0; padding: 0;
@@ -55,7 +60,6 @@ body {
   width: 90%; max-width: 720px; padding: 4rem;
   background: var(--bg); border-radius: 20px;
   box-shadow: 0 0 20px rgba(0,0,0,0.25);
-  animation: fadeInUp 0.4s ease-out;
 }
 
 /* Form */
@@ -97,7 +101,6 @@ button[type="submit"]:hover {
   background: var(--result-bg); padding: 2rem; margin-top: 2rem;
   border: 2px solid var(--accent); border-radius: 20px;
   box-shadow: 0 0 12px rgba(0,0,0,0.15);
-  animation: fadeInUp 0.4s ease-out;
 }
 .result-box h2 {
   font-size: 1.7rem; color: var(--accent); margin: 0 0 1rem;

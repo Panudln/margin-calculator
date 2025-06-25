@@ -58,7 +58,13 @@ flask run
 
 ```bash
 docker-compose up --build
+# oder
+docker compose up --build
 ```
+
+Führe den Befehl unbedingt im Projekt-Stammverzeichnis aus.
+Andernfalls kann Compose die **Dockerfile** nicht finden und meldet Fehler wie
+`failed to read dockerfile: ... Dockerfile: no such file or directory`.
 
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
