@@ -103,6 +103,17 @@ button[type="submit"]:hover {
   background: rgba(255,255,255,0.03);
 }
 
+/* Error */
+.error-box {
+  background: var(--result-bg);
+  color: #e53e3e;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border: 2px solid #e53e3e;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
 /* Credit-Box */
 .credit-box {
   position: fixed; bottom: 1rem; right: 1rem;
