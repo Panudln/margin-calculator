@@ -29,12 +29,18 @@ def index():
 
             # Decimal-Konvertierung
             mwst = Decimal(mwst_raw)
+            if mwst < 0 or mwst > 100:
+                raise ValueError("MwSt muss zwischen 0 und 100 liegen.")
             if ek_netto:
                 en = Decimal(ek_netto)
+                if en < 0:
+                    raise ValueError("EK Netto darf nicht negativ sein.")
                 ek_netto_val  = q2(en)
                 ek_brutto_val = q2(ek_netto_val * (Decimal(1) + mwst/Decimal(100)))
             else:
                 eb = Decimal(ek_brutto)
+                if eb < 0:
+                    raise ValueError("EK Brutto darf nicht negativ sein.")
                 ek_brutto_val = q2(eb)
                 ek_netto_val  = q2(ek_brutto_val / (Decimal(1) + mwst/Decimal(100)))
 
@@ -42,6 +48,8 @@ def index():
             vk_netto = None
             if aufschlag:
                 a = Decimal(aufschlag)
+                if a < 0:
+                    raise ValueError("Aufschlag darf nicht negativ sein.")
                 if aufschlag_typ == "%":
                     vk_netto = q2(ek_netto_val * (Decimal(1) + a/Decimal(100)))
                 else:  # Euro

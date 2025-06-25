@@ -103,6 +103,17 @@ button[type="submit"]:hover {
   background: rgba(255,255,255,0.03);
 }
 
+.result-box.error {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.error {
+  color: #f44336;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
 /* Credit-Box */
 .credit-box {
   position: fixed; bottom: 1rem; right: 1rem;
