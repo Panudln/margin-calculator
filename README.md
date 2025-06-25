@@ -57,8 +57,13 @@ flask run
 ### Mit Docker
 
 ```bash
-docker-compose up --build
+docker compose up --build
+# oder: docker-compose up --build
 ```
+
+Führe den Befehl unbedingt im Stammverzeichnis des Repositories aus,
+sonst erscheint oft die Fehlermeldung "Dockerfile not found", weil
+`docker compose` das Dockerfile im aktuellen Ordner erwartet.
 
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
