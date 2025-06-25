@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   margin-calculator:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     restart: unless-stopped

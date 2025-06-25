@@ -8,10 +8,10 @@
 </head>
 <body class="dark">
   <button id="theme-toggle" class="toggle-theme">🌞</button>
-  <div class="container">
+  <div class="container fade-in">
     <h1>🧮 Preisrechner</h1>
-    <form method="POST">
-      <fieldset>
+      <form method="POST">
+        <fieldset class="fade-in">
         <legend>📦 Einkaufspreis + Marge</legend>
 
         <label for="ek_brutto">💶 EK Brutto:</label>
@@ -35,7 +35,7 @@
     </form>
 
     {% if result %}
-      <div class="result-box">
+      <div class="result-box fade-in">
         <h2>Ergebnis</h2>
         <ul>
           {% for key, value in result.items() %}
@@ -47,7 +47,7 @@
   </div>
 
   <!-- Credit-Box -->
-  <div class="credit-box">
+  <div class="credit-box fade-in">
     Made by <a href="https://github.com/Panudln" target="_blank" rel="noopener">Panudln</a>
   </div>
 
