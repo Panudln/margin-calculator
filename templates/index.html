@@ -10,7 +10,11 @@
   <button id="theme-toggle" class="toggle-theme">🌞</button>
   <div class="container">
     <h1>🧮 Preisrechner</h1>
+    <p><a href="{{ url_for('quotes') }}">Alle gespeicherten Angebote</a></p>
     <form method="POST">
+      {% if quote_id %}
+      <input type="hidden" name="quote_id" value="{{ quote_id }}">
+      {% endif %}
       <fieldset>
         <legend>📦 Einkaufspreis + Marge</legend>
 

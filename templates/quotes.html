@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angebote</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="dark">
+  <button id="theme-toggle" class="toggle-theme">🌞</button>
+  <div class="container">
+    <h1>Gespeicherte Angebote</h1>
+    <p><a href="{{ url_for('index') }}">Neues Angebot</a></p>
+    <ul>
+    {% for q in quotes %}
+      <li><a href="{{ url_for('index', quote_id=q.id) }}">Angebot #{{ q.id }} vom {{ q.created_at.strftime('%Y-%m-%d %H:%M') }}</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      btn.textContent = document.body.classList.contains('dark') ? '🌞' : '🌙';
+    });
+  </script>
+</body>
+</html>
