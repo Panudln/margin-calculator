@@ -17,8 +17,9 @@
   - EK Netto  
   - EK Brutto  
   - VK Netto (inkl. Marge)  
-  - VK Brutto (inkl. Marge)  
-- **Modernes UI**  
+  - VK Brutto (inkl. Marge)
+  - Export als PDF oder CSV
+  - **Modernes UI**
   Dark-Mode (Standard)  
 - **Container-ready**  
   Lokal mit Flask oder per Docker-Compose starten  

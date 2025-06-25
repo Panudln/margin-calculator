@@ -1,10 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, send_file, make_response
+import csv
 from decimal import Decimal, ROUND_HALF_UP, InvalidOperation, getcontext
+from io import BytesIO, StringIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 # Saubere Rundung: immer kaufmännisch auf 2 Nachkommastellen
 getcontext().rounding = ROUND_HALF_UP
 
 app = Flask(__name__)
+app.secret_key = "dev-key"
 
 # Utility: quantize auf 2 Stellen
 def q2(d: Decimal) -> Decimal:
@@ -57,8 +62,13 @@ def index():
                 result["VK Netto (inkl. Marge)"]  = f"{vk_netto:.2f} €"
                 result["VK Brutto (inkl. Marge)"] = f"{vk_brutto:.2f} €"
 
+            session['result'] = result
+        else:
+            session.pop('result', None)
+
     except (InvalidOperation, ValueError) as e:
         result = {"Fehler": str(e)}
+        session['result'] = result
 
     return render_template(
         "index.html",
@@ -69,6 +79,39 @@ def index():
         aufschlag=str(aufschlag),
         aufschlag_typ=aufschlag_typ
     )
+
+
+@app.route("/export")
+def export():
+    fmt = request.args.get("format", "csv")
+    result = session.get("result")
+    if not result:
+        return "No result", 400
+    if fmt == "pdf":
+        buffer = BytesIO()
+        p = canvas.Canvas(buffer, pagesize=letter)
+        y = 750
+        p.setFont("Helvetica", 12)
+        p.drawString(100, y, "Berechnungsergebnis")
+        y -= 20
+        for key, value in result.items():
+            p.drawString(100, y, f"{key}: {value}")
+            y -= 15
+        p.showPage()
+        p.save()
+        buffer.seek(0)
+        return send_file(buffer, as_attachment=True,
+                         download_name="result.pdf", mimetype="application/pdf")
+    else:
+        buffer = StringIO()
+        writer = csv.writer(buffer)
+        writer.writerow(["Key", "Value"])
+        for k, v in result.items():
+            writer.writerow([k, v])
+        output = make_response(buffer.getvalue())
+        output.headers["Content-Disposition"] = "attachment; filename=result.csv"
+        output.headers["Content-Type"] = "text/csv"
+        return output
 
 if __name__ == "__main__":
     app.run(debug=True)
