@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   margin-calculator:
+    image: margin-calculator:latest
     build:
       context: .
       dockerfile: Dockerfile

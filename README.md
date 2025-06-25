@@ -70,6 +70,23 @@ Wenn du stattdessen `docker stack deploy` (z.B. über Portainer) nutzt, baue
 das Image vorher lokal und gib es in der Compose-Datei unter `image:` an –
 Swarm ignoriert nämlich `build:`-Anweisungen.
 
+Beispiel für den Stack-Betrieb:
+
+```bash
+# Image lokal bauen (und ggf. pushen)
+docker build -t margin-calculator:latest .
+
+# In docker-compose.yml sollte dann folgendes stehen:
+services:
+  margin-calculator:
+    image: margin-calculator:latest
+    ports:
+      - "5000:5000"
+
+# Anschließend den Stack deployen
+docker stack deploy -c docker-compose.yml mc
+```
+
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ---
