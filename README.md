@@ -94,6 +94,18 @@ services:
 
 ---
 
+## 🧪 Tests
+
+Ein rudimentäres Testset auf Basis von `pytest` liegt im Verzeichnis
+`tests/`. So kannst du es lokal ausführen:
+
+```bash
+pip install -r requirements.txt
+pytest
+```
+
+---
+
 ## 📄 License
 
 MIT © 2025 Panudln
