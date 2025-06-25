@@ -48,9 +48,12 @@ source venv/bin/activate
 # Abhängigkeiten installieren
 pip install -r requirements.txt
 
+# Optional: zusätzliche Tools für Tests
+pip install -r requirements-dev.txt
+
 # App starten
 flask run
-````
+```
 
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
@@ -104,4 +107,13 @@ MIT © 2025 Panudln
 
 Beiträge willkommen! Öffne gerne Issues oder Pull Requests. 🙌
 
+### Tests lokal ausführen
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
 ```
+
+CI führt die Tests automatisch aus. Die Installation erfolgt über
+`.github/workflows/ci.yml`.
+
