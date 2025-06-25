@@ -48,6 +48,14 @@ source venv/bin/activate
 # Abhängigkeiten installieren
 pip install -r requirements.txt
 
+# Datenbank einrichten
+flask db init  # nur beim ersten Start
+flask db migrate -m "Initial"
+flask db upgrade
+
+# Tests ausführen (optional)
+pytest
+
 # App starten
 flask run
 ````
@@ -82,6 +90,17 @@ services:
       - FLASK_APP=app
       - FLASK_ENV=production
 ```
+
+### Datenbankmigrationen
+
+Zum ersten Start muss die Datenbank einmal migriert werden:
+
+```bash
+flask db upgrade
+```
+
+Danach können neue Änderungen mit `flask db migrate -m "Beschreibung"` und
+`flask db upgrade` eingespielt werden.
 
 ---
 

@@ -1,0 +1,1 @@
+Place migration files here. Create the environment with `flask db init` if not present.
