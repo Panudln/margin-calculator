@@ -50,7 +50,7 @@ pip install -r requirements.txt
 
 # App starten
 flask run
-````
+```
 
 → Öffne im Browser: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
@@ -94,6 +94,14 @@ services:
 
 ---
 
+## 🧪 Tests
+
+```bash
+pytest
+```
+
+---
+
 ## 📄 License
 
 MIT © 2025 Panudln
@@ -103,5 +111,3 @@ MIT © 2025 Panudln
 ## 🤝 Contributing
 
 Beiträge willkommen! Öffne gerne Issues oder Pull Requests. 🙌
-
-```
